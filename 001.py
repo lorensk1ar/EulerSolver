@@ -81,3 +81,6 @@ def sum_any_two_divisors(limit, a, b):
 	total -= c * n * (n + 1) / 2
 
 	return total
+
+# and because everyone loves a good one liner...
+print(sum([n if any([n % 3 == 0, n % 5 == 0]) else 0 for n in range(1000)]))
