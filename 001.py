@@ -51,3 +51,33 @@ def sum_if_divisible(limit, a , b):
 	total -= c * n * (n + 1) / 2
 
 	return total
+
+# returns greatest common divisor using Euclid's algorithm
+def gcd(a, b):
+	while b != 0:
+		a, b = b, a % b
+	return a 
+
+# returns least common multiple
+def lcm(a, b):
+	c = gcd(a, b)
+	return a * b / c
+
+# extends constant time Gauss summation to any two divisors
+def sum_any_two_divisors(limit, a, b):
+	# up to but not including limit
+	limit -= 0.000000001
+
+	total = 0
+
+	n = int(limit / a)
+	total += a * n * (n + 1) / 2
+
+	n = int(limit / b)
+	total += b * n * (n + 1) / 2
+
+	c = lcm(a, b)
+	n = int(limit / c)
+	total -= c * n * (n + 1) / 2
+
+	return total
