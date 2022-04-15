@@ -1,0 +1,33 @@
+## MODULES
+import random, time
+
+## TEST
+slow = 0
+quick = 0
+tick = time.time()
+
+ok = True
+for trial in range(1000):
+	limit = random.randint(100000, 100000)
+	a = random.randint(1, 1000)
+	b = random.randint(1, 1000)
+
+	factors = [a, b]
+	x = pe001slow(limit, factors)
+	slow += time.time() - tick
+	tick = time.time()
+
+	y = pe001quick(limit, a, b)
+	quick += time.time() - tick
+	tick = time.time()
+
+	if x != y:
+		ok = False
+		print(limit, x, y, y - x)
+
+
+if ok:
+    print("Rockstar!")
+
+print("Time using list:", round(slow, 3), "seconds")
+print("Time using any two:", round(quick, 3), "seconds")
