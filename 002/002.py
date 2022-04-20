@@ -17,6 +17,7 @@ print(ans)
 
 
 # Constant time solution for ith number in the fibonnacci sequence
+# NB: fails sporadically i > 70 due perhaps to floating point precision
 Phi = (1 + pow(5, 1/2))/2
 phi = (1 - pow(5, 1/2))/2
 
