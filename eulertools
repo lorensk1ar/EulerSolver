@@ -1,0 +1,7 @@
+def is_divisible(b, a):
+    return b % a == 0
+
+def gcd(a, b):
+    while b != 0:
+        a, b = b, a % b
+    return a
