@@ -8,3 +8,70 @@ def gcd(a, b):
 
 def lcm(a, b):
     return a * b / gcd(a, b)
+    
+def get_primes(top = 10 ** 6):
+    print("I know kung fu! \n")
+    
+    valid_up_to = top ** 2
+
+    stop = pow(top, 1/2)
+    stop = int(stop)
+
+    prime_lookup = [True for i in range(top + 1)]
+    prime_lookup[0] = False
+    prime_lookup[1] = False
+
+    j = 2 + 2
+    while j <= top:
+        prime_lookup[j] = False
+        j += 2
+
+    j = 3 + 3
+    while j <= top:
+        prime_lookup[j] = False
+        j += 3
+
+    for k in range(6, stop + 1, 6):
+        a = k - 1
+        if prime_lookup[a]:
+            j = a + a
+            while j <= top:
+                prime_lookup[j] = False
+                j += a
+
+        b = k + 1
+        if prime_lookup[b]:
+            j = b + b
+            while j <= top:
+                prime_lookup[j] = False
+                j += b
+
+    prime_list = []
+    for i in range(top + 1):
+        if prime_lookup[i]:
+            prime_list.append(i)
+
+    print("Show me. \n")
+
+    return prime_lookup, prime_list, valid_up_to
+
+
+def is_prime(n):
+
+    assert n <= valid_up_to
+    
+    if n <= 1:
+        result = False
+    
+    elif n <= len(prime_list):
+        result = prime_lookup[n]
+    
+    else:
+        stop = pow(n, 1/2)
+        
+        result = True
+
+        for prime in prime_list:
+            if prime > stop:
+                break
+            
