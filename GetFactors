@@ -1,0 +1,37 @@
+### PRIME FACTORS
+
+## DIVIDE
+
+# loop through numbers
+
+# divide by each prime number
+
+# limit / 2? square root? how do I use the fact that only 1 factor > sqrt. try up to square root. is remainder always prime?
+
+# count how many times
+
+# until 1
+
+## recursive solution with memoization?
+
+## store prime factors for each number when generating primes? 
+
+
+## LIST
+
+# list primes up to limit 
+
+# start at 0
+
+# recurse using next prime in list
+
+# store in global list using product as index and dictionary as value
+
+# increment current prime
+
+# stop when over limit
+
+# efficient? do I determine prime factors only once per number? count to check
+
+# compare speed
+
