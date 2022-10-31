@@ -2,36 +2,133 @@
 
 ## DIVIDE
 
-# loop through numbers
+# recursive solution with memoization?
 
-# divide by each prime number
-
-# limit / 2? square root? how do I use the fact that only 1 factor > sqrt. try up to square root. is remainder always prime?
-
-# count how many times
-
-# until 1
-
-## recursive solution with memoization?
-
-## store prime factors for each number when generating primes? 
-
+# store prime factors for each number when generating primes? 
 
 ## LIST
+# repeated division beats list all combinations because of 3^0, 5^0, etc
+# too many combinations with 3^0, 5^0, 7^0, etc
+# also recursion depth
 
-# list primes up to limit 
 
-# start at 0
+### FUNCTIONS
+def get_primes_and_factors(top = 10 ** 6):
+    
+    # calculate square for use later in is_prime()
+    valid_up_to = top ** 2
 
-# recurse using next prime in list
+    prime_lookup, prime_list, factor_list = get_primes(top)
 
-# store in global list using product as index and dictionary as value
+    print(len(prime_list), "primes under", top, "\n")
 
-# increment current prime
+    factor_lookup = get_factors(factor_list, top)
 
-# stop when over limit
+    return prime_lookup, prime_list, factor_lookup, valid_up_to
+    
+    
+def get_primes(top = 10 ** 6):
+    print("I know kung fu! \n")
 
-# efficient? do I determine prime factors only once per number? count to check
+    # calculate square root
+    stop = pow(top, 1/2)
 
-# compare speed
+    # convert square root to integer
+    stop = int(stop)
+
+    # list numbers
+    prime_lookup = [True for i in range(top + 1)]
+    prime_lookup[0] = False
+    prime_lookup[1] = False
+
+    # initialize list for prime factor
+    factor_list = [[] for i in range(top + 1)]
+
+    # removes multiples of 2
+    j = 2 + 2
+    while j <= top:
+        factor_list[j].append(2)
+        prime_lookup[j] = False
+        j += 2
+
+    # remove multiples of 3
+    j = 3 + 3
+    while j <= top:
+        factor_list[j].append(3)
+        prime_lookup[j] = False
+        j += 3
+
+    # remove multiples up to square root
+    for k in range(6, stop + 1, 6):
+        a = k - 1
+        if prime_lookup[a]:
+            j = a + a
+            while j <= top:
+                factor_list[j].append(a)
+                prime_lookup[j] = False
+                j += a
+
+        b = k + 1
+        if prime_lookup[b]:
+            j = b + b
+            while j <= top:
+                factor_list[j].append(b)
+                prime_lookup[j] = False
+                j += b
+
+    prime_list = []
+    for i in range(top + 1):
+        if prime_lookup[i]:
+            factor_list[i] = [i]
+            prime_list.append(i)
+
+
+    print("Show me. \n")
+
+    return prime_lookup, prime_list, factor_list
+
+
+def is_prime(n):
+
+    assert n <= valid_up_to
+    
+    if n <= 1:
+        result = False
+    
+    elif n <= len(prime_list):
+        result = prime_lookup[n]
+    
+    else:
+        stop = pow(n, 1/2)
+        
+        result = True
+
+        for prime in prime_list:
+            if prime > stop:
+                break
+            
+            if n % prime == 0:
+                result = False
+                break
+            
+    return result
+
+def get_factors(factor_list, top = 10 ** 6):
+    factor_lookup = [{} for i in range(top + 1)]
+    
+    for i in range(2, top + 1):
+        n = i
+        for f in factor_list[i]:
+            e = 0
+            while n % f == 0:
+                n = n // f
+                e += 1
+                
+            factor_lookup[i][f] = e
+
+        if n != 1:
+            factor_list[i].append(n)
+            factor_lookup[i][n] = 1
+
+    return factor_lookup
 
