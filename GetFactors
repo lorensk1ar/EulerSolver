@@ -6,7 +6,7 @@
 
 # store prime factors for each number when generating primes?  y
 
-# decrease recursion depth in list factors by only recursing after finding a factor?
+# decrease recursion depth in list factors by only recursing after finding a factor? y
 
 ## LIST
 # repeated division beats list all combinations because of 3^0, 5^0, etc
@@ -30,7 +30,7 @@ def get_primes_and_factors(top = 10 ** 6):
     
     
 def get_primes(top = 10 ** 6):
-    print("I know kung fu! \n")
+    print("Loading primes... \n")
 
     # calculate square root
     stop = pow(top, 1/2)
@@ -84,9 +84,6 @@ def get_primes(top = 10 ** 6):
             factor_list[i] = [i]
             prime_list.append(i)
 
-
-    print("Show me. \n")
-
     return prime_lookup, prime_list, factor_list
 
 
@@ -116,6 +113,8 @@ def is_prime(n):
     return result
 
 def get_factors(factor_list, top = 10 ** 6):
+    print("Loading prime factors... \n")
+    
     factor_lookup = [{} for i in range(top + 1)]
     
     for i in range(2, top + 1):
@@ -151,6 +150,8 @@ def get_factors(factor_list, top = 10 ** 6):
             factor_list[i].append(n)
             factor_lookup[i][n] = 1
 
+    print("I know kung fu... \n"
+    
     return factor_lookup
 
 def get_number(x):
