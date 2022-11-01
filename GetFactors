@@ -2,9 +2,11 @@
 
 ## DIVIDE
 
-# recursive solution with memoization?
+# recursive solution with memoization? y
 
-# store prime factors for each number when generating primes? 
+# store prime factors for each number when generating primes?  y
+
+# decrease recursion depth in list factors by only recursing after finding a factor?
 
 ## LIST
 # repeated division beats list all combinations because of 3^0, 5^0, etc
@@ -131,4 +133,73 @@ def get_factors(factor_list, top = 10 ** 6):
             factor_lookup[i][n] = 1
 
     return factor_lookup
+    
+   def get_factors(factor_list, top = 10 ** 6):
+    factor_lookup = [{} for i in range(top + 1)]
+    
+    for i in range(2, top + 1):
+        n = i
+        for f in factor_list[i]:
+            e = 0
+            while n % f == 0:
+                n = n // f
+                e += 1
+                
+            factor_lookup[i][f] = e
+
+        if n != 1:
+            factor_list[i].append(n)
+            factor_lookup[i][n] = 1
+
+    return factor_lookup
+
+def get_number(x):
+
+    assert x <= valid_up_to
+
+    assert x > 0
+
+    n = 1
+    factors = list_factors(x)
+    for f in factors:
+        e = factors[f]
+        n *= f ** e
+
+    return n
+
+def list_factors(n, i = 0):
+    assert n <= valid_up_to
+    
+    assert n > 0
+
+    stop = pow(n, 1/2)
+    f = prime_list[i]
+
+    if n < len(factor_lookup):
+        # print("known")
+        result = factor_lookup[n]
+
+    elif f > stop:
+        # print("prime")
+        result = {n: 1}
+
+    else:
+        # print("n:", n, "i:", i)
+        e = 0
+        while n % f == 0:
+            n = n // f
+            e += 1
+
+        result = list_factors(n, i + 1)
+
+        if e > 0:
+            try:
+                result[f] += e
+
+            except:
+                result[f] = e
+
+    return result.copy()
+
+
 
