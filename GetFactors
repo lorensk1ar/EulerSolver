@@ -176,23 +176,31 @@ def list_factors(n, i = 0):
     f = prime_list[i]
 
     if n < len(factor_lookup):
-        # print("known")
         result = factor_lookup[n]
 
-    elif f > stop:
-        # print("prime")
-        result = {n: 1}
-
     else:
-        # print("n:", n, "i:", i)
         e = 0
-        while n % f == 0:
-            n = n // f
-            e += 1
+        while True:
+            while n % f == 0:
+                n = n // f
+                e += 1
 
-        result = list_factors(n, i + 1)
+            if e > 0:
+                break
 
-        if e > 0:
+            elif f > stop:
+                break
+                
+            else:
+                i += 1
+                f = prime_list[i]
+
+        if f > stop:
+            result = {n: 1}
+
+        else:
+            result = list_factors(n, i + 1)
+            
             try:
                 result[f] += e
 
@@ -200,6 +208,4 @@ def list_factors(n, i = 0):
                 result[f] = e
 
     return result.copy()
-
-
 
