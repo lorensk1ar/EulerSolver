@@ -1,0 +1,58 @@
+## MODULES
+from eulertoolsrev import *
+
+## FUNCTIONS
+def find_index(n, left, right, A):
+    middle = int((left + right) / 2)
+
+    m = A[middle]
+
+    if n == m:
+        return middle
+
+    elif right - left <= 1:
+        return left
+
+    else:
+
+        if n > m:
+            index = find_index(n, middle, right, A)
+
+        else:
+            index = find_index(n, left, middle, A)
+
+        return index
+
+## TEST
+import random
+
+limit = 10 ** 6
+
+prime_lookup, prime_list = get_primes(limit)
+
+ok = True
+for trial in range(100):
+  n = random.randint(1, limit)
+  index = find_index(n, 0, len(prime_list), prime_list)
+  
+  a = prime_list[index]
+  b = prime_list[index + 1]
+  # print(a, n, b)
+  
+  check = True
+  
+  if a > n:
+    check = False
+    
+  if n > b:
+    check = False
+    
+  if not check:
+    print(a, n, b)
+    ok = False
+    
+if ok:
+  print("Rockstar")
+  
+    
+    
