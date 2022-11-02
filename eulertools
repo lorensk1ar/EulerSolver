@@ -11,7 +11,7 @@ def lcm(a, b):
     
 def get_primes(top = 10 ** 6):
     # tell everyone you started
-    print("I know kung fu! \n")
+    print("Loading primes... \n")
     
     # find square to use later for is_prime()
     valid_up_to = top ** 2
@@ -62,7 +62,7 @@ def get_primes(top = 10 ** 6):
             prime_list.append(i)
 
     # tell everyone you're done
-    print("Show me. \n")
+    print(len(prime_list), "primes below", top, "\n")
 
     return prime_lookup, prime_list, valid_up_to
 
