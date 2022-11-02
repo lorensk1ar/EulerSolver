@@ -2,6 +2,8 @@
 
 # separate get_primes & get_factors 
 
+# also add get_factors to eulertools
+
 # formalize unit tests
 
 # unit test naming convention and filing?
