@@ -176,7 +176,7 @@ def list_factors(n, i = 0):
 ### MAIN
 prime_lookup, prime_list, factor_list = get_primes()
 
-factor_lookup = get_factors()
+factor_lookup = get_prime_factors()
 
 
 
