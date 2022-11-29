@@ -1,34 +1,13 @@
-### PRIME FACTORS
+'''
+### TO DO
 
-## DIVIDE
+did i use valid up to?
 
-# recursive solution with memoization? y
+can i write get_primes so it tests new top vs existing top?
 
-# store prime factors for each number when generating primes?  y
-
-# decrease recursion depth in list factors by only recursing after finding a factor? y
-
-## LIST
-# repeated division beats list all combinations because of 3^0, 5^0, etc
-# too many combinations with 3^0, 5^0, 7^0, etc
-# also recursion depth
-
+'''
 
 ### FUNCTIONS
-def get_primes_and_factors(top = 10 ** 6):
-    
-    # calculate square for use later in is_prime()
-    valid_up_to = top ** 2
-
-    prime_lookup, prime_list, factor_list = get_primes(top)
-
-    print(len(prime_list), "primes under", top, "\n")
-
-    factor_lookup = get_factors(factor_list, top)
-
-    return prime_lookup, prime_list, factor_lookup, valid_up_to
-    
-    
 def get_primes(top = 10 ** 6):
     print("Loading primes... \n")
 
@@ -43,6 +22,7 @@ def get_primes(top = 10 ** 6):
     prime_lookup[0] = False
     prime_lookup[1] = False
 
+    
     # initialize list for prime factor
     factor_list = [[] for i in range(top + 1)]
 
@@ -84,12 +64,14 @@ def get_primes(top = 10 ** 6):
             factor_list[i] = [i]
             prime_list.append(i)
 
-    return prime_lookup, prime_list, factor_list
 
+    print(len(prime_list), "primes below", top, "\n")
+
+    return prime_lookup, prime_list, factor_list
 
 def is_prime(n):
 
-    assert n <= valid_up_to
+    assert n <= prime_list[-1] ** 2
     
     if n <= 1:
         result = False
@@ -112,9 +94,9 @@ def is_prime(n):
             
     return result
 
-def get_factors(factor_list, top = 10 ** 6):
+def get_prime_factors(top = 10 ** 6):
     print("Loading prime factors... \n")
-    
+          
     factor_lookup = [{} for i in range(top + 1)]
     
     for i in range(2, top + 1):
@@ -131,33 +113,13 @@ def get_factors(factor_list, top = 10 ** 6):
             factor_list[i].append(n)
             factor_lookup[i][n] = 1
 
-    return factor_lookup
-    
-   def get_factors(factor_list, top = 10 ** 6):
-    factor_lookup = [{} for i in range(top + 1)]
-    
-    for i in range(2, top + 1):
-        n = i
-        for f in factor_list[i]:
-            e = 0
-            while n % f == 0:
-                n = n // f
-                e += 1
-                
-            factor_lookup[i][f] = e
+    print("I know kung fu! \n")
 
-        if n != 1:
-            factor_list[i].append(n)
-            factor_lookup[i][n] = 1
-
-    print("I know kung fu... \n"
-    
     return factor_lookup
 
 def get_number(x):
-
-    assert x <= valid_up_to
-
+    assert x <= prime_list[-1] ** 2
+    
     assert x > 0
 
     n = 1
@@ -169,7 +131,7 @@ def get_number(x):
     return n
 
 def list_factors(n, i = 0):
-    assert n <= valid_up_to
+    assert n <= prime_list[-1] ** 2
     
     assert n > 0
 
@@ -209,4 +171,26 @@ def list_factors(n, i = 0):
                 result[f] = e
 
     return result.copy()
+
+
+### MAIN
+prime_lookup, prime_list, factor_list = get_primes()
+
+factor_lookup = get_factors()
+
+
+
+
+
+
+
+
+
+        
+                
+
+        
+        
+    
+
 
